@@ -1,0 +1,27 @@
+version: "3.7"
+
+networks:
+  NginxNet:
+    external: true
+  IseBackend:
+
+services:
+  ise:
+    image: registry.thecodecache.net/interstellar-express/deepfreeze:latest
+    command: ["./wait-for-it.sh", "ise-psql:5432", "--", "./deepfreeze"]
+    networks:
+      - NginxNet
+      - IseBackend
+
+  ise-bot:
+    image: registry.thecodecache.net/interstellar-express/deepfreeze:latest
+    command: ["./wait-for-it.sh", "ise-psql:5432", "--", "./isebot"]
+    networks:
+      - IseBackend
+
+  ise-redis:
+    image: redis:latest
+    expose:
+      - "6379"
+    networks:
+      - IseBackend

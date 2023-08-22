@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  ise:
+    hostname: ise-prod
+    volumes:
+      - ../config/prod-config.yml:/deepfreeze/config/config.yml
+    ports:
+      - "0.0.0.0:8001:8000/tcp"
+  ise-bot:
+    volumes:
+      - ../config/prod-config.yml:/deepfreeze/config/config.yml
+
+  ise-redis:
+    ports:
+      - "6901:6379"

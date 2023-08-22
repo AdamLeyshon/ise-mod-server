@@ -1,0 +1,138 @@
+{
+  "definitions": {
+    "price_deviation": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "unit_to_stock_ratio": {
+          "type": "uint32"
+        },
+        "max_price_decrease_pct": {
+          "type": "float32"
+        },
+        "max_price_increase_pct": {
+          "type": "float32"
+        },
+        "step_size": {
+          "type": "float32"
+        },
+        "max_steps": {
+          "type": "uint32"
+        }
+      }
+    },
+    "stock_threshold": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "price_start": {
+          "metadata": {
+            "description": "The lower price boundary for this configuration"
+          },
+          "type": "uint32"
+        },
+        "price_end": {
+          "metadata": {
+            "description": "The upper price boundary for this configuration"
+          },
+          "type": "uint32"
+        },
+        "max_quantity": {
+          "metadata": {
+            "description": "This is the max amount of stock we want to have"
+          },
+          "type": "uint32"
+        },
+        "max_restock": {
+          "metadata": {
+            "description": "The max number of items to restock, must be higher than `min_quantity`"
+          },
+          "type": "uint32"
+        },
+        "min_quantity": {
+          "metadata": {
+            "description": "This is the minimum amount of stock we want to have"
+          },
+          "type": "uint32"
+        },
+        "randomness": {
+          "metadata": {
+            "description": "The fraction (0..1) used as upper bounds on some RNG operations",
+            "default": 0.05
+          },
+          "type": "float32"
+        },
+        "chance_to_restock": {
+          "metadata": {
+            "description": "The fraction (0..1) to determine if a product will be restocked when none in stock",
+            "default": 0.25
+          },
+          "type": "float32"
+        }
+      }
+    },
+    "price_threshold": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "price_start": {
+          "type": "uint32"
+        },
+        "price_end": {
+          "type": "uint32"
+        },
+        "buying": {
+          "ref": "price_deviation"
+        },
+        "selling": {
+          "ref": "price_deviation"
+        }
+      }
+    }
+  },
+  "metadata": {
+    "rustCustomDerive": "FromSqlRow, AsExpression, Debug, Clone, Default"
+  },
+  "properties": {
+    "restock": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "thresholds": {
+          "elements": {
+            "ref": "stock_threshold"
+          }
+        }
+      }
+    },
+    "pricing": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "thresholds": {
+          "elements": {
+            "ref": "price_threshold"
+          }
+        }
+      }
+    },
+    "threading": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "parallelism": {
+          "type": "uint32"
+        },
+        "batch_size": {
+          "type": "uint32"
+        }
+      }
+    }
+  }
+}

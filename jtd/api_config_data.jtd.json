@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "rustCustomDerive": "FromSqlRow, AsExpression, Debug, Clone, Default"
+  },
+  "properties": {
+    "inventory": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "vote_promotion_threshold": {
+          "type": "uint32"
+        },
+        "vote_age_threshold": {
+          "type": "uint32"
+        }
+      }
+    },
+    "maintenance": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "start_time": {
+          "type": "uint32"
+        }
+      }
+    },
+    "api": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone, Default"
+      },
+      "properties": {
+        "force_offline": {
+          "type": "boolean"
+        }
+      }
+    },
+    "delivery": {
+      "metadata": {
+        "rustCustomDerive": "Debug, Clone"
+      },
+      "properties": {
+        "delivery_cost_per_kg": {
+          "type": "uint32"
+        },
+        "collect_cost_per_kg": {
+          "type": "uint32"
+        }
+      }
+    }
+  }
+}

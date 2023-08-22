@@ -1,0 +1,7 @@
+drop index trade_statistics_monthly_item_code_uindex;
+drop index trade_statistics_monthly_date_index;
+drop index trade_statistics_item_code_uindex;
+drop index trade_statistics_date_index;
+drop table trade_statistics;
+drop table trade_statistics_monthly;
+drop table stock_config;

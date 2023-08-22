@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  ise:
+    hostname: ise-dev
+    volumes:
+      - ../config/dev-config.yml:/deepfreeze/config/config.yml
+    ports:
+      - "0.0.0.0:8000:8000/tcp"
+
+  ise-psql:
+    image: postgres:13-alpine
+    command:
+      - "postgres"
+      - "-c"
+      - "log_min_duration_statement=1000"
+      - "-c"
+      - "logging_collector=on"
+    environment:
+      - POSTGRES_PASSWORD=ise-psql-stack-image
+    ports:
+      - "0.0.0.0:5499:5432"
+    expose:
+      - "5432/tcp"
+    volumes:
+      - "./psql/:/docker-entrypoint-initdb.d/"
+      - "ise_dev_ise-psql-data:/var/lib/postgresql/data"
+    networks:
+      - IseBackend
+
+  ise-bot:
+    volumes:
+      - ../config/dev-config.yml:/deepfreeze/config/config.yml
+
+  ise-redis:
+    ports:
+      - "6900:6379"
+
+volumes:
+  ise_dev_ise-psql-data:
+    external: true
