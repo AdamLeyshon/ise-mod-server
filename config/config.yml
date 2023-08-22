@@ -1,0 +1,9 @@
+---
+database:
+  url: "postgresql://ise_api:xxx@xxx:5999/ise"
+logging:
+  level: debug
+discord:
+  auth_token: "xxxx"
+redis:
+  connection_string: "redis://ise-redis"

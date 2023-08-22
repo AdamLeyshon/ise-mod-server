@@ -1,0 +1,7 @@
+---
+database:
+  url: "postgresql://ise_api:@127.0.0.1/ise"
+redis:
+  connection_string: "redis://ise-redis:6379"
+logging:
+  level: "warn"
