@@ -1,0 +1,3 @@
+[submodule "proto"]
+	path = proto
+	url = ssh://git@github.com:AdamLeyshon/ise-mod-protos.git
